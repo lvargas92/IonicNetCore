@@ -30,6 +30,11 @@ namespace IonicAPI
             services.AddControllers();
             services.AddDbContext<NoticiaDBContext>(opciones => opciones.UseSqlServer(Configuration.GetConnectionString("dev")));
             services.AddTransient<NoticiaService, NoticiaService>();
+            services.AddTransient<AutorService, AutorService>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("PermitirTodo", def => def.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +44,8 @@ namespace IonicAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("PermitirTodo");
 
             app.UseHttpsRedirection();
 

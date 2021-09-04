@@ -67,7 +67,5 @@ namespace IonicAPI.Services
                 return false;
             }
         }
-
-
     }
 }
